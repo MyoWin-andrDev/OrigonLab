@@ -1,0 +1,23 @@
+{
+  "_comment": [
+    "Map each project slug (see data/projects.ts) to its Figma source.",
+    "",
+    "fileKey  — from the file URL:",
+    "           figma.com/design/<FILE_KEY>/Some-Name        <- this part",
+    "nodeId   — OPTIONAL. Right-click a frame > 'Copy link to selection',",
+    "           the URL ends ?node-id=1-23  ->  use \"1:23\" (dash becomes colon).",
+    "           With a nodeId that exact frame is rendered, which looks far",
+    "           better than the whole-file thumbnail. Without one, Figma's",
+    "           file thumbnail is used.",
+    "",
+    "Then:  export FIGMA_TOKEN=...   &&   npm run figma:thumbs",
+    "Remove this _comment key or leave it — the script ignores keys starting _."
+  ],
+
+  "meridian-commerce": { "fileKey": "", "nodeId": "" },
+  "northline-banking": { "fileKey": "", "nodeId": "" },
+  "vantage-portfolio": { "fileKey": "", "nodeId": "" },
+  "harbor-logistics": { "fileKey": "", "nodeId": "" },
+  "solace-studio": { "fileKey": "", "nodeId": "" },
+  "pallet-retail": { "fileKey": "", "nodeId": "" }
+}

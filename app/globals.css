@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════
+   ORIGON DESIGN TOKENS
+   Reference: labs.lusion.co
+   Their stack: Aeonik (400/500/900) + IBM Plex Mono Medium, #000 bg.
+   Ours:        Figtree (closest free Aeonik match) + IBM Plex Mono (exact).
+   Measured on labs.lusion.co: display type is weight 400 with
+   letter-spacing:normal — NOT tight negative tracking.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Theme: DARK (default, matches Lusion Labs) ──────────────── */
+:root {
+  /* One family for display AND body, as on labs.lusion.co (they run Aeonik
+     for both). --font-display is set by next/font in app/layout.tsx. */
+  --font-body: var(--font-display);
+
+  --bg:            #000000;
+  --bg-elevated:   #0A0A0A;
+  --card:          #111111;
+  --line:          #1F1F1F;
+  --line-strong:   #2E2E2E;
+
+  --ink:           #FFFFFF;
+  --ink-muted:     rgba(255, 255, 255, 0.72);
+  --dim:           #8A8A8A;
+  --faint:         #4A4A4A;
+
+  /* The cursor bubble paints with mix-blend-mode: difference, so the source
+     must be WHITE in every theme — difference inverts it against whatever is
+     behind it (white orb on black, black orb on white, inverted over media).
+     A dark source here would compute |255-17| = 238 on a white page and
+     disappear, which is exactly the light-theme bug this avoids. */
+  --cursor:        #FFFFFF;
+  --grain-opacity: 0.04;
+  --nebula-opacity: 0.55;
+}
+
+/* ── Theme: LIGHT ───────────────────────────────────────────── */
+:root[data-theme="light"] {
+  --bg:            #FFFFFF;
+  --bg-elevated:   #FAFAFA;
+  --card:          #F2F2F2;
+  --line:          #E4E4E4;
+  --line-strong:   #CFCFCF;
+
+  --ink:           #000000;
+  --ink-muted:     rgba(0, 0, 0, 0.74);
+  --dim:           #6B6B6B;
+  --faint:         #A8A8A8;
+
+  /* Stays white on purpose — see the note in :root. Difference blending turns
+     it black against the light ground, so it reads in both themes. */
+  --cursor:        #FFFFFF;
+  --grain-opacity: 0.028;
+  --nebula-opacity: 0.30;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TYPE SCALE  — the single source of truth.
+   Never set font-size/weight/tracking inline; use these classes.
+   Values derived from labs.lusion.co measured at 1920px.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Page headline — "PLAY GROUND / R&D COLLECTION / EXPERIMENTS"
+   Lusion: uppercase, ~76px, weight 400, lh 1.02, ls normal */
+.type-display-xl {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2.75rem, 5.4vw, 4.75rem);   /* 44 → 76px */
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: normal;
+  text-transform: uppercase;
+}
+
+/* Project title — "Akari"
+   Lusion: sentence case, ~72px, weight 400, lh 1.0 */
+.type-display-lg {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);       /* 40 → 72px */
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: normal;
+}
+
+/* Section headline — "Explore more"
+   Lusion: ~44px, weight 400 */
+.type-display-md {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.875rem, 3vw, 2.75rem);    /* 30 → 44px */
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: normal;
+}
+
+/* Card title — "Small World" / "Gemini Car Demo"
+   Lusion: ~30px, weight 400 */
+.type-title {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.25rem, 1.8vw, 1.875rem);  /* 20 → 30px */
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: normal;
+}
+
+/* Sub-heading — smaller card/section titles */
+.type-title-sm {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.125rem;                          /* 18px */
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: normal;
+}
+
+/* Filter tabs — "All 18  Experiment 2  Game 2" */
+.type-tab {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1rem, 1.25vw, 1.25rem);      /* 16 → 20px */
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: normal;
+}
+
+/* Lead paragraph — intro body copy. Lusion: ~19px, lh 1.5 */
+.type-body-lg {
+  font-family: var(--font-body), sans-serif;
+  font-size: clamp(1rem, 1.15vw, 1.1875rem);    /* 16 → 19px */
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+
+/* Default body copy */
+.type-body {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.9375rem;                         /* 15px */
+  font-weight: 400;
+  line-height: 1.62;
+  letter-spacing: normal;
+}
+
+/* Small body / captions */
+.type-body-sm {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.8125rem;                         /* 13px */
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+/* Nav links — "ABOUT  CONTACT  LUSION ↗"
+   Measured on labs.lusion.co: 16.08px / w400 / lh 1.0 / ls 0.02em / uppercase */
+.type-nav {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1rem;                              /* 16px */
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Mono label — "EXP 001" / "MONTHLY · WEBGL · 2D" / "LABS AREA"
+   Lusion: IBM Plex Mono Medium, 13px, wide tracking, uppercase */
+.type-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8125rem;                         /* 13px */
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+/* Smaller mono — card meta, footnotes */
+.type-label-sm {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;                         /* 11px */
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Loader counter — Lusion: Aeonik 900, lh 1.0, ls normal (180px on /about) */
+.type-counter {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(3.75rem, 8vw, 5.625rem);     /* 60 → 90px */
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: normal;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════════════ */
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* The native arrow stays visible on purpose. The bubble is a decorative
+   trail, not a replacement pointer — hiding the real cursor cost precision
+   when clicking and left fullscreen with no pointer at all. */
+
+::-webkit-scrollbar { width: 6px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 3px; }
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   EFFECTS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Film grain — Lusion's signature texture */
+.grain-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: -200%;
+  width: 400%;
+  height: 400%;
+  z-index: 60;
+  opacity: var(--grain-opacity);
+  animation: grain 0.7s steps(1) infinite;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+@keyframes grain {
+  0%,100% { transform: translate(0,0); }
+  10% { transform: translate(-5%,-5%); }
+  20% { transform: translate(5%,5%); }
+  30% { transform: translate(-5%,5%); }
+  40% { transform: translate(5%,-5%); }
+  50% { transform: translate(-3%,-8%); }
+  60% { transform: translate(8%,3%); }
+  70% { transform: translate(-8%,3%); }
+  80% { transform: translate(3%,-8%); }
+  90% { transform: translate(-3%,8%); }
+}
+
+/* Portrait grain — the page-level .grain-overlay is fixed to the viewport,
+   so tiles need their own statically-positioned copy. */
+.portrait-grain {
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
+}
+
+/* Word reveal mask — used by AnimatedText */
+.word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+/* Hairline divider matching Lusion's list rows */
+.hairline {
+  border-top: 1px solid var(--line);
+}
