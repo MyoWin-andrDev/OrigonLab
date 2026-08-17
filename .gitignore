@@ -14,3 +14,4 @@ public/work/*.png
 # build artefacts
 *.tsbuildinfo
 .vercel
+.env*

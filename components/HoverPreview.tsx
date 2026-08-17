@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useRef, useState, ReactNode } from "react";
+import { usePathname } from "next/navigation";
 
 /* ═══════════════════════════════════════════════════════════════
    HoverPreview — the floating thumbnail that trails the cursor.
@@ -45,6 +46,7 @@ export const useHoverPreview = () => useContext(Ctx);
 
 export default function HoverPreview({ children }: { children: ReactNode }) {
   const [item, setItem] = useState<PreviewItem | null>(null);
+  const pathname = usePathname();
   const [enabled, setEnabled] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -119,6 +121,13 @@ export default function HoverPreview({ children }: { children: ReactNode }) {
       window.removeEventListener("pointermove", onMove);
     };
   }, [enabled]);
+
+  /* Clearing on navigation is the fix for the card following the cursor onto
+     a detail page: clicking a row unmounts it mid-navigation, so its
+     onPointerLeave never fires and the preview would otherwise persist. */
+  useEffect(() => {
+    setItem(null);
+  }, [pathname]);
 
   const show = (next: PreviewItem) => {
     if (enabled) setItem(next);

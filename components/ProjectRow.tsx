@@ -51,6 +51,9 @@ export default function ProjectRow({
           show({ title, gradientFrom: gradientFrom!, gradientTo: gradientTo! });
         }}
         onPointerLeave={hide}
+        // Hides immediately on press, so the card is gone before the route
+        // transition begins rather than lingering through it.
+        onPointerDown={hide}
         // A row can be left via keyboard or by the page navigating away;
         // blur covers the focus case so the card never sticks.
         onBlur={hide}
