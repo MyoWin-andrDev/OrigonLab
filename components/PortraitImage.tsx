@@ -24,6 +24,12 @@ interface PortraitImageProps {
   pixelArt?: boolean;
   /** Skip the duotone and show the artwork's own colours. */
   fullColour?: boolean;
+  /**
+   * Hold the portrait desaturated until the card is hovered. Requires an
+   * ancestor with `group`. Off in the dialog, where there is no card to
+   * hover and the reader has already committed to looking.
+   */
+  desaturateUntilHover?: boolean;
   sizes: string;
   /** Applied to the scaling wrapper, e.g. the group-hover scale. */
   className?: string;
@@ -37,6 +43,7 @@ export default function PortraitImage({
   gradientTo,
   pixelArt = false,
   fullColour = false,
+  desaturateUntilHover = false,
   sizes,
   className = "",
   priority = false,
@@ -58,14 +65,27 @@ export default function PortraitImage({
         // Nearest-neighbour source: let the browser scale it, not the optimiser.
         unoptimized={pixelArt}
         quality={pixelArt ? 100 : 82}
-        className="object-cover"
+        className={[
+          "object-cover",
+          fullColour
+            // Colour arrives on hover. Slightly lifted contrast while grey so
+            // the desaturated state still has depth rather than going muddy.
+            ? "contrast-[1.06]"
+            // Duotone: push the midtones apart so it doesn't read flat.
+            : "contrast-[1.14] brightness-[1.04]",
+          desaturateUntilHover
+            ? "grayscale transition-[filter] duration-[700ms] ease-lusion " +
+              "group-hover:grayscale-0 " +
+              // Touch devices have no hover, so pin them to colour rather than
+              // leaving every portrait permanently grey.
+              "[@media(hover:none)]:grayscale-0"
+            : "",
+        ].join(" ")}
         style={{
           // fullColour drops the blend so the art keeps its own palette;
           // the gradient beneath then only shows through transparency.
           mixBlendMode: fullColour ? "normal" : "luminosity",
           imageRendering: pixelArt ? "pixelated" : "auto",
-          // Pushes the midtones apart so the duotone doesn't read flat.
-          filter: fullColour ? "none" : "contrast(1.14) brightness(1.04)",
         }}
       />
 

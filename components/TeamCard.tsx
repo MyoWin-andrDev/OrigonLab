@@ -66,6 +66,7 @@ export default function TeamCard({ member, index, onOpen }: TeamCardProps) {
           gradientTo={member.gradientTo}
           pixelArt={member.pixelArt}
           fullColour={member.fullColour}
+          desaturateUntilHover
           sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
           className="transition-transform duration-[900ms] ease-lusion will-change-transform group-hover:scale-[1.05]"
         />
