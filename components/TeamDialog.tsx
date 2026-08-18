@@ -120,6 +120,7 @@ export default function TeamDialog({ member, index, onClose }: TeamDialogProps) 
                     gradientFrom={member.gradientFrom}
                     gradientTo={member.gradientTo}
                     pixelArt={member.pixelArt}
+                    fullColour={member.fullColour}
                     sizes="96px"
                   />
                 ) : (
