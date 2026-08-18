@@ -1,12 +1,15 @@
 import { TeamMember } from "@/lib/types";
 
-// Photography still to come; the gradient + monogram stands in until then.
+// NFT-style character art (Freepik). Each gradient is tuned to its
+// artwork's background so the tile frame and the art agree.
 // The four roles map one-to-one onto the four disciplines in data/services.ts,
 // and the tech lists reflect the stack OrigonLab actually builds on.
 export const team: TeamMember[] = [
   {
     slug: "graphic-designer",
     name: "Charm",
+    image: "/team/charm.jpg",
+    fullColour: true,
     position: "Graphic Designer",
     bio: "Builds brand identities from the mark outward — logo, icon systems, and the 3D and motion work that brings them off the page.",
     skills: [
@@ -36,12 +39,14 @@ export const team: TeamMember[] = [
       "InDesign",
       "Figma",
     ],
-    gradientFrom: "from-amber-400",
-    gradientTo: "to-orange-600",
+    gradientFrom: "from-yellow-400",
+    gradientTo: "to-orange-500",
   },
   {
     slug: "ui-ux-designer",
     name: "Zenith",
+    image: "/team/zenith.jpg",
+    fullColour: true,
     position: "UI/UX Designer",
     bio: "Takes products from user research and flows through wireframes to a full interface system — then builds a clickable prototype you can test and sign off before a line of code is written.",
     skills: [
@@ -57,12 +62,14 @@ export const team: TeamMember[] = [
       "Accessibility (WCAG)",
     ],
     tech: ["Figma", "Framer", "ProtoPie", "Maze", "Storybook"],
-    gradientFrom: "from-violet-500",
-    gradientTo: "to-indigo-700",
+    gradientFrom: "from-rose-500",
+    gradientTo: "to-pink-600",
   },
   {
     slug: "mobile-developer",
     name: "Zyden",
+    image: "/team/zyden.jpg",
+    fullColour: true,
     position: "Mobile Developer",
     bio: "Ships iOS and Android applications end to end, from first screen to store listing and release.",
     skills: [
@@ -74,12 +81,14 @@ export const team: TeamMember[] = [
       "Store submission",
     ],
     tech: ["Flutter", "Dart", "Kotlin", "Swift", "Jetpack Compose"],
-    gradientFrom: "from-teal-400",
-    gradientTo: "to-cyan-700",
+    gradientFrom: "from-green-500",
+    gradientTo: "to-emerald-700",
   },
   {
     slug: "fullstack-developer",
     name: "Adam",
+    image: "/team/adam.jpg",
+    fullColour: true,
     position: "Fullstack Developer",
     bio: "Designs the system before building it — architecture, data model and state machines — then ships the web build, the API behind it, and the infrastructure that keeps it running.",
     skills: [
@@ -103,7 +112,7 @@ export const team: TeamMember[] = [
       "PostgreSQL",
       "MongoDB",
     ],
-    gradientFrom: "from-rose-500",
-    gradientTo: "to-fuchsia-700",
+    gradientFrom: "from-red-500",
+    gradientTo: "to-orange-700",
   },
 ];

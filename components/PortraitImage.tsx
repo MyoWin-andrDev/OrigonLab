@@ -22,6 +22,8 @@ interface PortraitImageProps {
   gradientTo: string;
   /** Preserve hard pixel edges and skip optimisation. */
   pixelArt?: boolean;
+  /** Skip the duotone and show the artwork's own colours. */
+  fullColour?: boolean;
   sizes: string;
   /** Applied to the scaling wrapper, e.g. the group-hover scale. */
   className?: string;
@@ -34,6 +36,7 @@ export default function PortraitImage({
   gradientFrom,
   gradientTo,
   pixelArt = false,
+  fullColour = false,
   sizes,
   className = "",
   priority = false,
@@ -57,15 +60,17 @@ export default function PortraitImage({
         quality={pixelArt ? 100 : 82}
         className="object-cover"
         style={{
-          mixBlendMode: "luminosity",
+          // fullColour drops the blend so the art keeps its own palette;
+          // the gradient beneath then only shows through transparency.
+          mixBlendMode: fullColour ? "normal" : "luminosity",
           imageRendering: pixelArt ? "pixelated" : "auto",
           // Pushes the midtones apart so the duotone doesn't read flat.
-          filter: "contrast(1.14) brightness(1.04)",
+          filter: fullColour ? "none" : "contrast(1.14) brightness(1.04)",
         }}
       />
 
       {/* Grain, tying the portrait to the rest of the page */}
-      <div aria-hidden className="portrait-grain absolute inset-0" />
+      {!fullColour && <div aria-hidden className="portrait-grain absolute inset-0" />}
 
       {/* Slight vignette so the tile's text always has ground to sit on */}
       <div

@@ -98,6 +98,12 @@ export interface TeamMember {
   image?: string;
   /** Sprite/pixel source: skip optimisation and scale nearest-neighbour. */
   pixelArt?: boolean;
+  /**
+   * Show the artwork in its own colours instead of the gradient duotone.
+   * Right for bold illustration/NFT art, where the duotone would flatten
+   * two distinct characters into near-identical silhouettes.
+   */
+  fullColour?: boolean;
   /** Gradient shown behind the portrait, or instead of it while none exists. */
   gradientFrom: string;
   gradientTo: string;
