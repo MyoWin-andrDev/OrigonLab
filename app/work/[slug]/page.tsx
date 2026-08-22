@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getProjectBySlug, projects } from "@/data/projects";
@@ -8,6 +9,17 @@ import IndexCard from "@/components/IndexCard";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
+}
+
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const project = getProjectBySlug(params.slug);
+  if (!project) return { title: "Project not found" };
+  return {
+    title: `${project.title} — ${project.tags.join(", ")}`,
+    description: project.summary,
+    alternates: { canonical: `/work/${project.slug}` },
+    openGraph: { title: project.title, description: project.summary, type: "article" },
+  };
 }
 
 /* ── Social row ────────────────────────────────────────────────────

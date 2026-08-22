@@ -35,9 +35,51 @@ const mono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const SITE = "https://www.origonlab.com";
+
 export const metadata: Metadata = {
-  title: "OrigonLab",
-  description: "A software development lab — design, apps, and infrastructure from one place.",
+  // metadataBase makes every relative OG/canonical URL absolute. Without it
+  // Next emits relative og:image paths, which most crawlers and social
+  // scrapers silently drop.
+  metadataBase: new URL(SITE),
+  title: {
+    default: "OrigonLab — Design, apps and infrastructure from one lab",
+    // Every page appends this, so tabs and search results stay branded
+    // without each page repeating the studio name by hand.
+    template: "%s — OrigonLab",
+  },
+  description:
+    "A software development lab in Pattaya, Thailand. Brand identity, UI/UX, websites and mobile apps — designed, built and hosted by one team.",
+  keywords: [
+    "software development lab",
+    "web development Thailand",
+    "mobile app development",
+    "UI UX design studio",
+    "brand identity design",
+    "Next.js development",
+    "Flutter development",
+  ],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: "OrigonLab",
+    url: SITE,
+    title: "OrigonLab — Design, apps and infrastructure from one lab",
+    description:
+      "Brand identity, UI/UX, websites and mobile apps — designed, built and hosted by one team.",
+    locale: "en_GB",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "OrigonLab",
+    description:
+      "Brand identity, UI/UX, websites and mobile apps — designed, built and hosted by one team.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

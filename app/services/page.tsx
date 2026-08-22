@@ -3,6 +3,15 @@ import ProjectRow from "@/components/ProjectRow";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedSection from "@/components/AnimatedSection";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Services — brand, UI/UX, web and mobile",
+  description:
+    "Four disciplines run as one pipeline: brand identity and 3D, UI/UX design, website development, and mobile apps for iOS and Android.",
+  alternates: { canonical: "/services" },
+};
+
 export default function ServicesPage() {
   return (
     <main className="mx-auto max-w-content px-6 pb-32 pt-36 md:px-10 md:pt-48">

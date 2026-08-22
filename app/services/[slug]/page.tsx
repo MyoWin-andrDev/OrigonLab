@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getServiceBySlug, services } from "@/data/services";
@@ -11,6 +12,17 @@ import AnimatedSection from "@/components/AnimatedSection";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
+}
+
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const service = getServiceBySlug(params.slug);
+  if (!service) return { title: "Service not found" };
+  return {
+    title: service.title,
+    description: service.summary,
+    alternates: { canonical: `/services/${service.slug}` },
+    openGraph: { title: service.title, description: service.summary },
+  };
 }
 
 export default function ServiceDetailPage({ params }: { params: { slug: string } }) {

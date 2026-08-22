@@ -8,6 +8,15 @@ import PricingWizardSection from "@/components/PricingWizardSection";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedSection from "@/components/AnimatedSection";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pricing — nine packages, transparent rates",
+  description:
+    "Nine packages from $250. Prices are listed openly, with an option to own the design files and source outright, plus a live estimator.",
+  alternates: { canonical: "/pricing" },
+};
+
 /**
  * Structured data for the package list.
  *

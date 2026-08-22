@@ -2,6 +2,15 @@ import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedText from "@/components/AnimatedText";
 import PillButton from "@/components/PillButton";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "A lab, not an agency",
+  description:
+    "Why OrigonLab keeps brand, product design, engineering and hosting under one roof instead of handing projects between three separate teams.",
+  alternates: { canonical: "/about" },
+};
+
 interface Principle {
   title: string;
   body: string;

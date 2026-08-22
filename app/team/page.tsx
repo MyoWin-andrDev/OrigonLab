@@ -3,6 +3,15 @@ import TeamGrid from "@/components/TeamGrid";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedSection from "@/components/AnimatedSection";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "The team building it",
+  description:
+    "Meet the four specialists behind OrigonLab — graphic design and 3D, UI/UX, mobile development, and fullstack engineering.",
+  alternates: { canonical: "/team" },
+};
+
 export default function TeamPage() {
   return (
     <main className="mx-auto max-w-content px-6 pb-32 pt-36 md:px-10 md:pt-48">

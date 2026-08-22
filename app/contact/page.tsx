@@ -2,6 +2,15 @@ import PillButton from "@/components/PillButton";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedSection from "@/components/AnimatedSection";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact — start a build",
+  description:
+    "Tell us what you are building. Email OrigonLab directly, or price your project first with the estimator and bring the number with you.",
+  alternates: { canonical: "/contact" },
+};
+
 export default function ContactPage() {
   return (
     <main className="mx-auto flex min-h-screen max-w-content flex-col justify-center px-6 pb-24 pt-36 md:px-10">
