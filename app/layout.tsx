@@ -9,6 +9,7 @@ import ThemeProvider from "@/components/ThemeProvider";
 import ViewModeProvider from "@/components/ViewModeProvider";
 import HoverPreview from "@/components/HoverPreview";
 import SiteFooter from "@/components/SiteFooter";
+import { Analytics } from "@vercel/analytics/next";
 
 /* Display + body.
  *
@@ -110,6 +111,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </HoverPreview>
           </ViewModeProvider>
         </ThemeProvider>
+
+        {/* Vercel Analytics — page views and visitors. Sits outside the
+            providers and last in the body so it cannot affect first paint. */}
+        <Analytics />
       </body>
     </html>
   );
